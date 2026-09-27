@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# abhishek-portfolio-website
 
-## Getting Started
+Personal site for Abhishek Kumar Jha — Senior Software Engineer, Backend & AI Infrastructure.
 
-First, run the development server:
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Motion · Lucide. Every route is statically prerendered.
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 20.19+ or 22+ is recommended (a transitive ESLint dependency warns on older 20.x).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Update content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All copy and facts live in `content/` — components only render them.
 
-## Learn More
+| File | What it holds |
+| --- | --- |
+| `content/site.ts` | Name, headline, links, email, nav, the "at a glance" numbers, core stack |
+| `content/sdlc.ts` | Agentic SDLC case study: metrics, planes, modules, traceability, stack |
+| `content/systems.ts` | Other systems (add `href` when a public link exists) |
+| `content/experience.ts` | Roles, education, certifications |
+| `content/principles.ts` | Engineering principles |
 
-To learn more about Next.js, take a look at the following resources:
+**Resume:** put a PDF at `public/resume.pdf`. The Resume button appears automatically on the next build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The simulations (`components/viz/*-drill.tsx`, `pipeline-graph.tsx`) keep their scripted frames at the top of each file; file names, task names and percentages there are illustrative and labelled as such on the page.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+```
+app/                     layout, home, /systems/agentic-sdlc, OG image, icon, sitemap, robots
+content/                 all site data
+components/ui/           primitives: Section, Panel, StatusDot, Tag, ButtonLink, CopyEmail, playback controls
+components/viz/          hero pipeline + runtime / governance / AI Ops drills
+components/sdlc/         case-study building blocks: planes, lifecycle, module tabs, architecture, cards
+components/sections/     home-page sections
+hooks/use-playback.ts    deterministic frame playback (in-view only, reduced-motion aware, hold gates)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy (Vercel)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push to GitHub and import the repo in Vercel — no configuration needed.
+2. Optional: set `NEXT_PUBLIC_SITE_URL` (e.g. `https://abhishekjha.dev`) once a custom domain is attached. Until then canonical URLs, sitemap and Open Graph use Vercel's production URL.
